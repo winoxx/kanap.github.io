@@ -9,8 +9,8 @@ displayLocageStorage();
 function displayLocageStorage() {
   const cart_locaStorage = localStorage.length;
   const cart = JSON.parse(localStorage.getItem("cart"));
-  for (const e in cart) {
-    const product = cart[e];
+  for ( key in cart) {
+    const product = cart[key];
     console.log(product.quantity); //afficher quantity du product
     fetch(`http://localhost:3000/api/products/${product.id}`)
     .then((response) => response.json())
@@ -110,7 +110,11 @@ function AddProduct(cart_product, data_product) {
   // creation fonction pour interroge base de donnée et modifier la quantité
   function calcultatNewValue(key, newvalue) {
     const cart = JSON.parse(localStorage.getItem("cart"));
-    cart[key].quantity = newvalue;
+
+    // Ajouter Number() sinon newvalue indique une string et non un nombre
+    cart[key].quantity = Number(newvalue);
+    
+    
     localStorage.setItem("cart", JSON.stringify(cart));
     //appel fonction pour recaculer automatiquement
     resetCart()

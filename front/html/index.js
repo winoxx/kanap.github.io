@@ -1,11 +1,11 @@
 fetch("http://localhost:3000/api/products")
   .then((res) => res.json())
   .then((data) => {
-    for (products of data) {
-      createElement(products);
+    for (product of data) {
+      afficherArticles(product);
     }
 
-    function createElement(canap) {
+    function afficherArticles(canap) {
       let image = document.createElement("img");
       image.src = canap.imageUrl;
 
